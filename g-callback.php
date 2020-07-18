@@ -12,13 +12,31 @@
 		header('Location: login.php');
 		exit();
 	}
+	//fetch user information//
 	$oAuth = new Google_Service_Oauth2($gClient);
 	$userData = $oAuth->userinfo->get();
-
+	
+	//geting user google derive information//
+	$drive_service = new Google_Service_Drive($gClient);
+	$files_list = $drive_service->files->listFiles(array())->getFiles();
 	echo "<pre>";
 	print_r($userData);
-	print_r($userData['birthday']);
+//	print_r($files_list);
 	echo "</pre>";
+
+	if (count($files_list) == 0) {
+    	print "No files found.\n";
+	} else {
+		    foreach ($files_list as $file) {
+		        $res['name'] = $file->getName();
+		        $res['id'] = $file->getId();
+		        $res['img'] = "<img src=".$file->getName().">";
+		        $files[] = $res;
+
+		    }
+		    echo "<pre>";
+    	print_r($files);
+	}
 	exit;
 
 	$_SESSION['id'] = $userData['id'];
