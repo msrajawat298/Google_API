@@ -1,4 +1,8 @@
 <?php
+//this is our config file in this file we have write 
+//about client id and client secrete id 
+// and also configue database connection......
+
 	session_start();
 	require_once "vendor/autoload.php";
 	$gClient = new Google_Client();
@@ -8,13 +12,14 @@
 	$gClient->setRedirectUri("http://localhost/Google_API/g-callback.php");
 	//$gClient->setScopes(array('email', 'https://www.googleapis.com/auth/plus.login'));
 	//IT is useful when you need to access user youtube or drive or another tools......
-	$gClient->setScopes([
-        "https://www.googleapis.com/auth/plus.me",
-        // "https://www.googleapis.com/auth/urlshortener",
-        // "https://www.googleapis.com/auth/tasks",
-        // "https://www.googleapis.com/auth/adsense",
-        // "https://www.googleapis.com/auth/youtube",
-        "https://www.googleapis.com/auth/drive",
+	 $gClient->setScopes([
+         "https://www.googleapis.com/auth/plus.me",
+ //        //"https://www.google.com/m8/feeds",
+ //        // "https://www.googleapis.com/auth/urlshortener",
+ //        // "https://www.googleapis.com/auth/tasks",
+ //        // "https://www.googleapis.com/auth/adsense",
+ //        // "https://www.googleapis.com/auth/youtube",
+        	"https://www.googleapis.com/auth/drive",
     ]);
 
 	// //$gClient->addScope("https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email");	
@@ -24,4 +29,8 @@
 	    if ($con->connect_error) {
 	    	die("Connection failed: " . $con->connect_error);
 		}	
+
+
+
+
 ?>

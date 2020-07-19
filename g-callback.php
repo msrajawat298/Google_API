@@ -17,13 +17,17 @@
 	$userData = $oAuth->userinfo->get();
 	
 	//geting user google derive information//
+	$max_results = 10;
 	$drive_service = new Google_Service_Drive($gClient);
 	$files_list = $drive_service->files->listFiles(array())->getFiles();
 	echo "<pre>";
-	print_r($userData);
-//	print_r($files_list);
+	print_r($userData); //$userdata having our user informtion 
+	print_r($files_list); // here we have user google derive access we can also edit to change user derive data ok...
+	//https://console.developers.google.com/apis/dashboard?project=wide-bastion-228914 this is site for genrate your client id and api
+	//https://github.com/MSRAJAWAT298 download source code if you need....
+	
 	echo "</pre>";
-
+exit;
 	if (count($files_list) == 0) {
     	print "No files found.\n";
 	} else {
@@ -39,6 +43,8 @@
 	}
 	exit;
 
+	//this code is for fetch user details
+
 	$_SESSION['id'] = $userData['id'];
 	$_SESSION['email'] = $userData['email'];
 	$_SESSION['gender'] = $userData['gender'];
@@ -46,6 +52,7 @@
 	$_SESSION['familyName'] = $userData['familyName'];
 	$_SESSION['givenName'] = $userData['givenName'];
 
+//here we trying to insert data in our
 	 $sql="insert into google_users (clint_id,name,last_name,google_email,gender,picture_link) values
  ('".$userData['id']."','".$userData['givenName']."','".$userData['familyName']."','".$userData['email']."',
  '".$userData['gender']."','".$userData['picture']."')";
